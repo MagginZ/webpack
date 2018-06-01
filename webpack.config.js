@@ -19,8 +19,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'), // 出口文件绝对路径
         // filename: 'bundle.js' // 出口文件打包
         // 多入口打包
-        filename: '[name].js',
-        publicPath: website.publicPath
+        filename: '[name].js'
     },
     // 所有模块配置
     module: {
@@ -45,7 +44,7 @@ module.exports = {
                     loader: 'url-loader', // 使用指定的loader
                     options: {
                         limit: 500, // limit参数：把小于500B的文件打包成base64的格式，写入js
-                        outputPath: 'images/' // 打包图片到images路径
+                        outputPath: '/images' // 打包图片到images路径
                     }
                 }]
             },
