@@ -157,3 +157,54 @@ npm install html-withimg-loader --save
 }
 
 ```
+
+> 处理css前缀问题
+```
+// 安装模块
+npm install --save-dev postcss-loader autoprefixer
+```
+在根目录，与webpack.config.js同级创建postcss.config.js文件
+
+```
+module.exports = {
+    plugins: [
+        require('autoprefixer') // 引入次插件可以添加前缀的能力
+    ]
+}
+```
+需要在webpack.config.js的css中配置：
+```
+loader: {
+    'postcss-loader'
+}
+```
+结果： 已经需要前缀的css已经自动添加了 
+``` 
+ -webkit-transform: rotate(45deg);
+ transform: rotate(45deg);
+```
+
+> 消除未使用的css  PurifyCss
+安装插件
+```
+npm i -D purifycss-webpack purify-css // -D = --save-dev
+```
+在config中引入glob, purifycss-webpack
+```
+const glob = require('glob')
+const PurifyCSSPlugin = require("purifycss-webpack");
+
+```
+配置插件 - plugins
+```
+// 注意：使用这个插件必须配合extract-text-webpack-plugin这个插件
+
+
+new PurifyCSSPlugin({
+  // Give paths to parse for rules  These should be absolute!
+  paths: glob.sync(path.join(__dirname  'src/*.html')),
+  
+})
+```
+
+

@@ -5,9 +5,10 @@ const uglify = require('uglifyjs-webpack-plugin')
 const htmlPlugin = require('html-webpack-plugin')
 // css分离 引入插件 安装 sudo npm install --save-dev extract-text-webpack-plugin
 const extractTextPlugin = require("extract-text-webpack-plugin")
-var website = {
-    publicPath: "http: //localhost:1717"
-}
+//  消除css冗余 引入glob
+const glob = require('glob')
+// 引入purifycss-webpack插件
+const PurifyCSSPlugin = require("purifycss-webpack")
 module.exports = {
     // 入口
     entry: {
@@ -33,7 +34,12 @@ module.exports = {
                 // 分离css 需要修改loader为：
                 use: extractTextPlugin.extract({
                     fallback: "style-loader",
-                    use: "css-loader"
+                    // use: "css-loader"
+                    // 使用前缀需要修改为：
+                    use: [
+                        {loader: 'css-loader'},
+                        {loader: 'postcss-loader'}
+                    ]
                 })
             },
             // 安装配置图片打包的loader
@@ -81,7 +87,7 @@ module.exports = {
                     }],
                     fallback: "style-loader"
                 })
-            }
+            },
         ]
     }, 
     // 插件
@@ -96,7 +102,11 @@ module.exports = {
             template: './src/index.html' // 要打包的html模板路径和文件名称
         }),
         // 配置插件熟悉
-        new extractTextPlugin('css/index.css') // 这里的/css是分离后的路径 需要修改css-loader 和 style-loader
+        new extractTextPlugin('css/index.css'), // 这里的/css是分离后的路径 需要修改css-loader 和 style-loader
+        // 配置purifyCssPlugin
+        new PurifyCSSPlugin({
+            paths: glob.sync(path.join(__dirname, 'src/*.html')) // 会遍历文件查找那些css被使用了
+        })
     ],
     // 开发服务 
     devServer: {
