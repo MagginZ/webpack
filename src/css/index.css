@@ -1,0 +1,12 @@
+body{
+    background: green;
+}
+#title{
+    color: #fff;
+}
+#tupian{
+    background-image: url(../images/hh.jpg);
+    width:300px;
+    border:1px solid;
+    height:300px;
+}
