@@ -206,5 +206,36 @@ new PurifyCSSPlugin({
   
 })
 ```
+>babel & ENV
+安装
+```
+cnpm install --save-dev babel-core babel-loader babel-preset-es2015 babel-preset-react
+
+```
+
+ENV:
+```
+npm install --save-dev babel-preset-env
+```
+
+配置：
+```
+{
+    test:/\.(jsx|js)$/,
+    use:{
+        loader:'babel-loader',
+        // 外部新建.babelrc后 将preset配置写入，就可以不使用这串代码
+        // options:{
+        //      presets:[
+        //          "es2015","react" // env将es换为env
+        //      ]
+        // }
+    },
+    exclude:/node_modules/
+}
+```
+可以修改entry.js中的代码
+使用es6的语法，创建变量等操作
+
 
 

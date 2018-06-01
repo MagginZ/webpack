@@ -88,6 +88,21 @@ module.exports = {
                     fallback: "style-loader"
                 })
             },
+            // babel配置
+            {
+                test: /\.(jsx|js)$/,
+                use: {
+                    loader: 'babel-loader',
+                    // 使用.babelrc文件这一段就不需要了
+                    // options: {
+                    //     presets: [
+                    //         "es2015", "react"
+                    //     ]
+                    // }
+                },
+                exclude: /node_modules/
+            }
+
         ]
     }, 
     // 插件

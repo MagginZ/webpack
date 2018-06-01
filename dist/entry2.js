@@ -2,4 +2,4 @@
 /*!***********************!*\
   !*** ./src/enrty2.js ***!
   \***********************/
-/*! no static exports found */function(module,exports){eval("alert('今天是个好日子')\n\n//# sourceURL=webpack:///./src/enrty2.js?")}});
+/*! no static exports found */function(module,exports,__webpack_require__){"use strict";eval("\n\nalert('今天是个好日子');\n\n//# sourceURL=webpack:///./src/enrty2.js?")}});
