@@ -9,12 +9,24 @@ const extractTextPlugin = require("extract-text-webpack-plugin")
 const glob = require('glob')
 // 引入purifycss-webpack插件
 const PurifyCSSPlugin = require("purifycss-webpack")
+
+// 模块化引入
+const entry = require("./webpack_config/entry_webpack")
 module.exports = {
+    // 项目打包后调试
+    // devtool: 'eval-source-map', // source-map(大型，开发阶段),eval-source-map(中小型)
+    // 需修改entry为：
+    // entry: __dirname+ "/app/main.js"
+    // 需要修改出口为：
+    // output: {__dirname + "/public", filename: "文件名.js"}
     // 入口
-    entry: {
-        entry: './src/entry.js',
-        entry2: './src/enrty2.js'
-    }, 
+    // entry: {
+    //     entry: './src/entry.js',
+        
+    //     entry2: './src/enrty2.js'
+    // },
+    // 模块引入entry入口文件需修改为：
+    entry: entry.path, 
      // 出口
     output: {
         path: path.resolve(__dirname, 'dist'), // 出口文件绝对路径
@@ -129,5 +141,5 @@ module.exports = {
         host: 'localhost', // 服务器发访问地址
         compress: true, // 服务器端压缩是否开启
         port: 1717 // 端口号
-    } 
+    }
 }
